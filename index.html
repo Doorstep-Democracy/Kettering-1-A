@@ -1,6 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google Analytics 4 (G-JHMFYD8YDQ). Loads only on the live hostname, so previews
+       on localhost or Tailscale don't count as visitors. Same guard as SlateCard.html. -->
+  <script>
+  (function(){
+    "use strict";
+    var LIVE_HOST = "kettering-1-a.motorbikematt.com";
+    var GA_ID = "G-JHMFYD8YDQ";
+    if (location.hostname !== LIVE_HOST) return;
+
+    var tag = document.createElement("script");
+    tag.async = true;
+    tag.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(tag);
+
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){ dataLayer.push(arguments); }
+    gtag("js", new Date());
+    gtag("config", GA_ID);   /* sends the page_view */
+  })();
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Matthew Reyes — Kettering 1-A Precinct Captain</title>
@@ -40,45 +60,12 @@
     a { color: var(--teal); text-decoration: none; }
     a:hover { text-decoration: underline; }
 
-    /* ── STICKY SIGNUP BANNER (replaces header) ── */
-    .top-bar {
-      background: var(--teal);
-      color: #fff;
-      text-align: center;
-      padding: .75rem 1.5rem;
-      font-size: .95rem;
-      font-weight: 700;
-      position: sticky;
-      top: 0;
-      z-index: 200;
-      box-shadow: 0 2px 8px rgba(0,0,0,.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: .75rem;
-      flex-wrap: wrap;
-    }
-    .top-bar a {
-      display: inline-block;
-      background: #fff;
-      color: var(--teal);
-      font-weight: 900;
-      padding: .3rem 1rem;
-      border-radius: 3px;
-      font-size: .88rem;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: background .2s;
-    }
-    .top-bar a:hover { background: #d6eef0; text-decoration: none; }
-
-    /* ── HERO ── */
+    /* ── HERO (phone layout; the two-column layout starts at 661px, see the end of this sheet) ── */
     .hero {
       background: linear-gradient(135deg, #1a1a1a 0%, #2c0a18 100%);
       position: relative;
       overflow: hidden;
-      padding: 3.5rem 2rem 3rem;
-      text-align: center;
+      padding: 2rem 1.25rem 2.5rem;
     }
     .hero::before {
       content: "";
@@ -92,9 +79,8 @@
       max-width: 900px;
       margin: 0 auto;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 2.5rem;
-      align-items: center;
+      grid-template-columns: 1fr;
+      gap: 1.75rem;
       text-align: left;
     }
     .hero-text { display: flex; flex-direction: column; align-items: flex-start; }
@@ -116,23 +102,28 @@
       color: #fff;
       line-height: 1.12;
       margin-bottom: .85rem;
+      text-wrap: balance;
     }
     .hero-sub {
       font-size: 1rem;
       color: rgba(255,255,255,.82);
-      margin-bottom: .35rem;
+      margin-bottom: .75rem;
+      text-wrap: pretty;
     }
     .hero-sub-party {
       font-size: 1rem;
       font-weight: 700;
       color: #fff;
-      margin-bottom: 1.75rem;
+      margin-bottom: 1.5rem;
+      text-wrap: pretty;
     }
     .hero-ctas {
       display: flex;
+      flex-direction: column;
       gap: .75rem;
-      flex-wrap: wrap;
+      width: 100%;
     }
+    .hero-ctas .btn { display: block; text-align: center; }
 
     /* photo in hero */
     .hero-photo {
@@ -144,7 +135,7 @@
     .hero-photo img {
       width: 100%;
       height: 100%;
-      max-height: 420px;
+      max-height: 260px;
       object-fit: cover;
       object-position: center top;
       display: block;
@@ -155,19 +146,6 @@
       font-size: .78rem;
       text-align: center;
       padding: .45rem 1rem;
-    }
-
-    /* mobile: stack photo below text, but keep it visible */
-    @media (max-width: 660px) {
-      .hero { padding: 2rem 1.25rem 2.5rem; }
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 1.75rem;
-        text-align: center;
-      }
-      .hero-text { align-items: center; }
-      .hero-photo img { max-height: 260px; }
-      .hero-ctas { justify-content: center; }
     }
 
     .btn {
@@ -217,19 +195,20 @@
     }
 
     /* ── SECTION SHELL ── */
-    section { padding: 3rem 2rem; }
+    section { padding: 2rem 1.25rem; }
     section.alt { background: var(--section-bg); }
     .section-inner { max-width: 900px; margin: 0 auto; }
     h2.section-title {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       font-weight: 700;
       color: var(--text);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
+      text-wrap: balance;
     }
     h2.section-title span { color: var(--teal); }
 
     /* ── ABOUT ── */
-    .about-body p { color: var(--muted); margin-bottom: .9rem; }
+    .about-body p { color: var(--muted); margin-bottom: 1rem; text-wrap: pretty; }
     .about-body p:last-child { margin-bottom: 0; }
     .about-body strong { color: var(--text); }
 
@@ -256,7 +235,7 @@
       background: var(--bg);
       border: 1px solid var(--border);
       border-left: 5px solid var(--teal);
-      padding: 2.5rem 2rem;
+      padding: 1.5rem 1.25rem;
       max-width: 640px;
       margin: 0 auto;
       box-shadow: var(--shadow);
@@ -270,7 +249,7 @@
     footer {
       background: var(--maroon);
       color: rgba(255,255,255,.85);
-      padding: 2.5rem 2rem 1.5rem;
+      padding: 2rem 1.25rem 1.5rem;
     }
     .footer-inner {
       max-width: 900px;
@@ -297,6 +276,7 @@
       margin-bottom: .25rem;
     }
     .footer-col a:hover { color: #fff; text-decoration: underline; }
+    .footer-col a { padding: .35rem 0; }
     .footer-divider {
       border: none;
       border-top: 1px solid rgba(255,255,255,.2);
@@ -309,19 +289,27 @@
       color: rgba(255,255,255,.5);
       text-align: center;
     }
+
+    /* ── WIDER SCREENS: the phone layout above, plus a roomier one from 661px ── */
+    @media (min-width: 661px) {
+      .hero { padding: 3.5rem 2rem 3rem; }
+      .hero-inner { grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+      .hero-sub-party { margin-bottom: 1.75rem; }
+      .hero-ctas { flex-direction: row; flex-wrap: wrap; width: auto; }
+      .hero-ctas .btn { display: inline-block; }
+      .hero-photo img { max-height: 420px; }
+      section { padding: 3rem 2rem; }
+      h2.section-title { font-size: 1.75rem; margin-bottom: 1.5rem; }
+      .newsletter-box { padding: 2.5rem 2rem; }
+      footer { padding: 2.5rem 2rem 1.5rem; }
+    }
   </style>
 </head>
 <body>
 
   <!-- UPDATE NOTICE BANNER -->
   <div style="background:#8E0C3A;color:#fff;font-weight:bold;text-align:center;padding:.55rem 1.5rem;font-size:.82rem;letter-spacing:.02em;">
-    ⚠️ This website will be regularly updated after the May 5th primary election. ⚠️
-  </div>
-
-  <!-- STICKY SIGNUP BANNER -->
-  <div class="top-bar">
-    <span>Get local news for Kettering 1-A — all neighbors welcome.</span>
-    <a href="#newsletter">Sign Up Safely →</a>
+    ⚠️ This website will be regularly updated after the Nov. 3 General Election. ⚠️
   </div>
 
   <!-- HERO -->
@@ -329,9 +317,9 @@
     <div class="hero-inner">
       <div class="hero-text">
         <div class="hero-eyebrow">Montgomery County Democratic Party</div>
-        <h1>Hi, I'm your neighbor Matthew Reyes running for Precinct Captain.</h1>
-        <p class="hero-sub">I want our voices heard by the party on the issues that matter to all of us. I'm building a neighborhood newsletter with local info and regional updates that actually matter to us here in Kettering 1-A.</p>
-        <p class="hero-sub-party">Although I'm working with the Democratic Party, all of my neighbors are welcome to talk to me, regardless of party.</p>
+        <h1>Hi, I'm Matthew Reyes, your neighbor and Precinct Captain.</h1>
+        <p class="hero-sub">I want our voices heard on the issues that matter to all of us. I'm building a neighborhood newsletter and survey that listen to your concerns, share what's going on around us, and show what our politicians can do about it.</p>
+        <p class="hero-sub-party">Although I'm an official Committee member of the Montgomery County Democratic Party, all of my neighbors, even in other precincts or parties, are welcome to talk to me.</p>
         <div class="hero-ctas">
           <a href="#newsletter" class="btn btn-teal">Get the Newsletter</a>
           <a href="#what-is-a-captain" class="btn btn-outline">What's a Precinct Captain?</a>
@@ -365,9 +353,12 @@
     <div class="section-inner">
       <h2 class="section-title">A neighbor who's <span>already done the work</span></h2>
       <div class="about-body">
-        <p>I'm a Kettering 1-A resident on Peach Orchard Road. Last year I helped start a local grassroots PAC focused on voter turnout across Kettering — running door-to-door canvassing, a neighborhood email list, and data-driven outreach to voters across the city.</p>
-        <p>All five of the local, bi-partisan candidates we supported won their seats last November. Now I want to bring that same energy directly to our precinct — keeping you informed about what's happening on our block, at city hall, and at the ballot box, including what the Montgomery County Democratic Party is doing on your behalf.</p>
-        <p>My newsletter won't just cover local issues. <strong>It will give you the opportunity to speak out on the changes you want to see on the things that actually affect our streets.</strong> I want to hear from you — and I want to make sure the party hears you too.</p>
+        <p>I'm a Kettering 1-A resident on Peach Orchard Road. In 2025, I helped start a local grassroots Team focused on voter turnout across Kettering. It was my first time canvassing door to door, running a neighborhood email list, and doing data-driven outreach.</p>
+        <p>Today, I'm on the Communications Committee for the Montgomery County Democratic Party. My focus is modernizing how the party communicates with all of us. My goal is to create systems that give you a voice and help the party listen to and understand the issues you care about most. We must also keep you informed about what's happening in our community, including what the party is doing on our behalf.</p>
+        <p>I'm building two experimental projects, and I'd love your help.</p>
+        <p>First, a new kind of newsletter that tells you directly what's going on, without the echo chamber or endless asks for money.</p>
+        <p>Second, a living survey that listens to what you care about, instead of telling you what you should care about. <strong>It gives you a way to speak up about the changes you want to see in our community, from our politicians, and in government.</strong></p>
+        <p>I want to hear from you, and I'll make sure the party hears you too.</p>
       </div>
     </div>
   </section>
@@ -416,7 +407,7 @@
       <div class="newsletter-box" style="text-align:left;">
         <h2>Local news you'll actually use</h2>
         <p>
-          Covering how the local party covers local elections, issues and other important matters that affect our lives — not the national noise.
+          What's happening in local elections, local issues, and the local party, with none of the national noise.
           <strong>Everyone is welcome to sign up, regardless of party.</strong> Don't want to give up your email? I don't blame you, just bookmark this page for regular updates.
         </p>
         <div class="ml-embedded" data-form="qG50hO"></div>
@@ -448,7 +439,7 @@
       </div>
     </div>
     <hr class="footer-divider" />
-    <p class="footer-legal">Paid for by Matthew F. Reyes for Precinct Captain · Democrat, Kettering 1-A, Montgomery County, Ohio</p>
+    <p class="footer-legal">Paid for by Matthew F. Reyes, Precinct Captain · Democrat, Kettering 1-A, Montgomery County, Ohio</p>
   </footer>
 
 </body>
